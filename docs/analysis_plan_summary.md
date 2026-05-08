@@ -1,15 +1,3 @@
-# Analysis Plan Summary
-
-This summary is based on the original analysis plan in:
-
-- `/userhome/cs3/u3011656/hypertension/hypertension/Analysis Plan.docx`
-
-and on the completed project work tracked in:
-
-- `/userhome/cs3/u3011656/hypertension/hypertension/analysis/docs/project_status_report_2026-04-24.md`
-
-## First-Part Workflow Covered by This Repo
-
 ### 1. Hypertension cohort selection
 
 - start from `lds_encounter_diagnoses`
@@ -47,16 +35,10 @@ and on the completed project work tracked in:
 
 ### 5. Follow-up grouping
 
-The first analysis block focused on comparing patients by follow-up pattern, especially:
-
 - no follow-up
 - at least one follow-up
 
-The related scripts also generated more detailed visit-count groupings in the working directory.
-
 ### 6. First-phase outputs
-
-The completed first-phase scripts produced:
 
 - visit-number summary outputs
 - baseline comparison tables
@@ -65,7 +47,3 @@ The completed first-phase scripts produced:
 - patient journey plots
 - Kaplan-Meier style follow-up analyses
 - forest plot output
-
-## Why This Repo Exists
-
-This repo is a clean structure for that first analysis block only. It is not meant to package the later trajectory-modeling phase yet.
