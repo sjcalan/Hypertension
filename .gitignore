@@ -1,0 +1,9 @@
+# Local placeholders
+outputs_placeholder/
+
+# Python
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
