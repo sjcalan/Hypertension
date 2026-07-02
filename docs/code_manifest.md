@@ -1,29 +1,43 @@
 # Code Manifest
 
-This repository contains the current source scripts for the hypertension visit-trajectory analysis. Data files and generated outputs are intentionally excluded.
+This manifest lists the source files currently included for collaborator review. Data files and generated outputs are intentionally excluded.
 
-## Active Scripts
+## Main Workflow Scripts
 
-- `src/analysis_scripts/06_build_visit_level_cohort.py`
-- `src/analysis_scripts/07i_q1_gbtm_relative_visit_only_shorttest.R`
-- `src/analysis_scripts/run_q1_gbtm_relative_visit_only_full_ng4_gpu_minvis3_parallel.slurm`
-- `src/analysis_scripts/10_compare_gbtm_ng_models.py`
-- `src/analysis_scripts/13_ng4_explore_cluster_differences.py`
-- `src/analysis_scripts/14_prepare_overleaf_manuscript_assets.py`
-- `src/analysis_scripts/15_make_compact_journey_appendix.py`
-- `src/analysis_scripts/16_prepare_overleaf_revision_tables.R`
-- `src/analysis_scripts/17_create_google_doc_docx.py`
-- `src/analysis_scripts/17_ng4_full_denominator_bp_sensitivity.py`
-- `src/analysis_scripts/18_regenerate_quarterly_clinical_plots.py`
+- `scripts/01_build_visit_level_cohort.py`
+  - constructs the visit-level hypertension cohort
+- `scripts/02_fit_visit_only_gbtm.R`
+  - fits visit-only group-based trajectory models
+- `scripts/03_compare_gbtm_models.py`
+  - compares candidate trajectory model solutions
+- `scripts/04_make_manuscript_tables.R`
+  - generates manuscript-facing cluster comparison tables
+- `scripts/05_make_quarterly_trajectory_plots.py`
+  - generates quarterly retention, treatment, control, SBP, and DBP plots
+- `scripts/06_make_individual_journey_plots.py`
+  - generates individual patient journey plots by trajectory group
+- `scripts/07_prepare_overleaf_assets.py`
+  - prepares selected tables and figures for Overleaf
+- `scripts/08_create_manuscript_docx.py`
+  - exports a collaborator-review manuscript draft
 
-## Coverage
+## Cluster Job Scripts
 
-- Cohort construction
-- Visit-only GBTM model fitting
-- SLURM job configuration for the ng=4 model run
-- Model comparison across candidate group counts
-- Cluster-level table generation
-- Quarterly clinical and retention trajectory plotting
-- Individual journey plotting
-- Manuscript table and figure export
-- BP denominator sensitivity checks
+- `jobs/run_gbtm_ng4.slurm`
+  - SLURM batch job for the primary ng=4 model run
+
+## Supporting Scripts
+
+- `scripts/supporting/explore_ng4_cluster_differences.py`
+  - exploratory cluster-difference summaries and earlier plot variants
+- `scripts/supporting/full_denominator_bp_sensitivity.py`
+  - sensitivity plots using full cluster denominators for BP-related outcomes
+
+## Excluded Files
+
+- raw EHR tables
+- patient-level analytic datasets
+- intermediate model objects
+- generated CSV tables
+- generated PDF/PNG figures
+- manuscript DOCX/ZIP exports

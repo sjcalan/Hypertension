@@ -1,18 +1,43 @@
-# Hypertension
+# Hypertension Visit-Trajectory Analysis
 
-This repository contains the source-code structure for the hypertension visit-trajectory analysis. It is intended for collaborators to review the analysis workflow and reproduce the code organization without exposing raw EHR data or patient-level derived files.
+This repository contains the analysis code for a hypertension visit-trajectory study using longitudinal electronic health record data. The project identifies visit-based care-retention trajectories with group-based trajectory modeling and compares the resulting groups on retention, treatment, blood pressure control, SBP, and DBP outcomes.
 
-## Current Structure
+The repository is designed for collaborator review and manuscript reproducibility. It does not include raw EHR data, patient-level derived datasets, model-output files, generated figures, or generated tables.
 
-- `src/analysis_scripts/`
-  - current scripts for cohort construction, GBTM fitting, model comparison, tables, figures, manuscript assets, and sensitivity checks
+## Repository Structure
+
+- `scripts/`
+  - main analysis scripts, ordered by workflow step
+- `scripts/supporting/`
+  - exploratory and sensitivity-analysis scripts
+- `jobs/`
+  - SLURM job scripts used for longer model-fitting runs
 - `docs/`
-  - workflow summary and code manifest
-- `data_reference/`
-  - placeholders describing expected raw and derived data locations
-- `outputs_placeholder/`
-  - placeholder folders for generated tables, figures, and model outputs
+  - workflow notes and code manifest
+- `data/`
+  - data availability and local-data setup note
+- `results/`
+  - generated-output note; actual results are not committed
 
-## Data Policy
+## Main Workflow
 
-Raw EHR files, patient-level analytic datasets, generated CSV outputs, and manuscript figures are not committed to this repository.
+1. Build the visit-level hypertension cohort.
+2. Fit visit-only group-based trajectory models.
+3. Compare candidate trajectory models.
+4. Generate manuscript-facing cluster comparison tables.
+5. Generate quarterly clinical and retention trajectory plots.
+6. Generate individual patient journey plots.
+7. Prepare Overleaf manuscript assets.
+8. Export a collaborator-review manuscript draft.
+
+See `scripts/README.md` for the script-by-script map.
+
+## Data And Privacy
+
+The study uses sensitive EHR-derived data. These data are not included in this repository and should not be committed to GitHub.
+
+Several scripts assume the secure HKU project directory structure used during analysis. To run the workflow in another environment, update the local base paths or pass the available command-line path arguments where supported.
+
+## Current Primary Model
+
+The primary manuscript analysis uses a 4-group visit-only GBTM solution among patients with at least 3 visits. Visits are aligned to each patient's first observed visit and represented using 14-day relative-time bins over a 36-month window.

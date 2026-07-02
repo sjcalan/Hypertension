@@ -12,6 +12,10 @@ __pycache__/
 .DS_Store
 
 # Data and generated outputs
+data/*
+!data/README.md
+results/*
+!results/README.md
 *.csv
 *.tsv
 *.xlsx
