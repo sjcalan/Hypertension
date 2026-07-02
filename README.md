@@ -2,12 +2,10 @@
 
 This repository contains the analysis code for a hypertension visit-trajectory study using longitudinal electronic health record data. The project identifies visit-based care-retention trajectories with group-based trajectory modeling and compares the resulting groups on retention, treatment, blood pressure control, SBP, and DBP outcomes.
 
-The repository is designed for collaborator review and manuscript reproducibility. It does not include raw EHR data, patient-level derived datasets, model-output files, generated figures, or generated tables.
-
 ## Repository Structure
 
 - `scripts/`
-  - main analysis scripts, ordered by workflow step
+  - main analysis scripts
 - `scripts/supporting/`
   - exploratory and sensitivity-analysis scripts
 - `jobs/`
@@ -17,7 +15,7 @@ The repository is designed for collaborator review and manuscript reproducibilit
 - `data/`
   - data availability and local-data setup note
 - `results/`
-  - generated-output note; actual results are not committed
+  - results
 
 ## Main Workflow
 
@@ -34,9 +32,7 @@ See `scripts/README.md` for the script-by-script map.
 
 ## Data And Privacy
 
-The study uses sensitive EHR-derived data. These data are not included in this repository and should not be committed to GitHub.
-
-Several scripts assume the secure HKU project directory structure used during analysis. To run the workflow in another environment, update the local base paths or pass the available command-line path arguments where supported.
+The study uses sensitive EHR-derived data. These data are not included in this repository.
 
 ## Current Primary Model
 
