@@ -1,6 +1,33 @@
 # Python
 __pycache__/
 *.pyc
+.ipynb_checkpoints/
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
 
 # OS
 .DS_Store
+
+# Data and generated outputs
+*.csv
+*.tsv
+*.xlsx
+*.xls
+*.sas7bdat
+*.rds
+*.RDS
+*.parquet
+*.feather
+*.pkl
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.tiff
+*.docx
+*.zip
+outputs/
+analysis/outputs/

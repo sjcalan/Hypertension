@@ -1,49 +1,44 @@
-### 1. Hypertension cohort selection
+### 1. Hypertension cohort construction
 
-- start from `lds_encounter_diagnoses`
-- identify patients with diagnosis strings containing `hypertensi*`
-- exclude records with missing `new_patient_id`
+- start from encounter diagnosis records
+- identify patients with diagnosis strings containing hypertension-related text
+- exclude records with missing patient identifiers
+- merge demographics, social history, vitals, diagnosis context, and medication information
+- construct a visit-level analytic file with one row per patient visit
 
-### 2. Patient-level enrichment
+### 2. Visit-level derived indicators
 
-- merge demographics
-- add comorbidity flags derived from diagnosis text:
-  - diabetes
-  - heart failure
-  - chronic kidney disease
-  - stroke
-  - heart attack
+- derive systolic and diastolic blood pressure variables
+- define visit-level blood pressure control using the planned threshold:
+  - uncontrolled if systolic BP is at least 140 mmHg or diastolic BP is at least 90 mmHg
+  - controlled if both systolic and diastolic BP are observed and below those thresholds
+- derive treatment indicators from medication exposure information
+- derive visit timing, visit number, and patient-level follow-up summaries
 
-### 3. Visit-level enrichment
+### 3. Visit-only trajectory construction
 
-- merge with `lds_vitals`
-- merge visit-level diagnosis and medication context
-- include core vitals such as:
-  - systolic BP
-  - diastolic BP
-  - pulse
-  - respiration rate
-  - temperature
-  - height
-  - weight
-- calculate BMI where possible
+- align every patient to their own first observed visit as day 0
+- use relative follow-up time rather than absolute calendar date
+- divide follow-up into 14-day bins over the modeled 36-month window
+- code visit activity within the observed span between the first and last visit
+- avoid padding time after a patient's last observed follow-up with artificial no-visit records
 
-### 4. Visit-level derived indicators
+### 4. Group-based trajectory modeling
 
-- create `controlled` at each visit from systolic and diastolic BP
-- create `treated` at each visit from medication exposure timing
+- fit visit-only group-based trajectory models using binned visit activity
+- exclude patients with only 2 visits from the primary trajectory analysis
+- compare candidate models with 3, 4, 5, and 6 groups
+- select the 4-group model as the primary solution based on fit, class balance, interpretability, and clinical coherence
 
-### 5. Follow-up grouping
+### 5. Cluster comparison
 
-- no follow-up
-- at least one follow-up
+- compare the 4 visit-trajectory groups on retention, visit spacing, treatment, blood pressure, and blood pressure control outcomes
+- report overall cluster-comparison p values and pairwise cluster comparisons where needed
+- evaluate alternative blood pressure control definitions, including last observed BP control and durable control across consecutive controlled visits
 
-### 6. First-phase outputs
+### 6. Manuscript-facing outputs
 
-- visit-number summary outputs
-- baseline comparison tables
-- retention-pattern tables
-- blood-pressure-related figures
-- patient journey plots
-- Kaplan-Meier style follow-up analyses
-- forest plot output
+- generate the main cluster-comparison table
+- generate quarterly retention, treatment, BP control, SBP, and DBP trajectory plots
+- generate compact individual patient journey plots by trajectory group
+- prepare selected tables and figures for the Overleaf manuscript package
